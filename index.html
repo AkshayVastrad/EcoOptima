@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EcoOptima: IoT energy management for German SMEs</title>
+<meta name="description" content="EcoOptima is a concept for plug-and-play IoT energy monitoring and AI-driven optimization for German SMEs, with verified savings and carbon reporting.">
+<link rel="canonical" href="https://YOUR-USERNAME.github.io/ecooptima/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="EcoOptima: IoT energy management for German SMEs">
+<meta property="og:description" content="A concept for plug-and-play IoT energy monitoring and AI-driven optimization for German SMEs.">
+<meta property="og:url" content="https://YOUR-USERNAME.github.io/ecooptima/">
+<meta name="theme-color" content="#0d1a1e">
+<!-- Google Search Console: paste your verification tag here, then remove these comment marks
+<meta name="google-site-verification" content="PASTE-YOUR-CODE-HERE">
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "EcoOptima",
+  "url": "https://YOUR-USERNAME.github.io/ecooptima/",
+  "inLanguage": "en",
+  "description": "A concept for plug-and-play IoT energy monitoring and AI-driven optimization for German SMEs."
+}
+</script>
+<style>
+:root {
+  --bg: #f3f6f4;
+  --panel: #e6eeea;
+  --ink: #12262b;
+  --muted: #475d64;
+  --line: #c4d3ce;
+  --accent: #11705b;
+  --accent-line: #17806a;
+  --waste: #e39a3b;
+  --waste-text: #8f5409;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1a1e;
+    --panel: #14272c;
+    --ink: #e6efec;
+    --muted: #a5b8b3;
+    --line: #2a3f44;
+    --accent: #5fcfae;
+    --accent-line: #5fcfae;
+    --waste: #f0a850;
+    --waste-text: #f0b46a;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.skip { position: absolute; left: -999px; top: 0; background: var(--ink); color: var(--bg); padding: .6rem 1rem; z-index: 10; }
+.skip:focus { left: 0; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+header.top { padding: 1.25rem 0; }
+header.top .wrap { display: flex; flex-wrap: wrap; gap: .75rem 2rem; align-items: baseline; justify-content: space-between; }
+.wordmark { font-weight: 800; font-size: 1.35rem; letter-spacing: -.02em; color: var(--ink); text-decoration: none; }
+.wordmark span { color: var(--accent); }
+nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: .25rem 1.4rem; margin: 0; padding: 0; font-size: .95rem; }
+nav a { color: var(--muted); text-decoration: none; }
+nav a:hover { color: var(--ink); text-decoration: underline; }
+
+.hero { padding: 2.5rem 0 3.5rem; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 3rem; align-items: center; }
+h1 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); line-height: 1.06; letter-spacing: -.025em; font-weight: 800; margin: 0 0 1.1rem; }
+.lead { font-size: 1.2rem; color: var(--muted); max-width: 34ch; margin: 0 0 1.4rem; }
+.note { border-left: 4px solid var(--waste); padding: .15rem 0 .15rem .9rem; max-width: 46ch; color: var(--muted); font-size: .98rem; margin: 0 0 1.6rem; }
+.btn { display: inline-block; background: var(--accent); color: var(--bg); font-weight: 700; padding: .75rem 1.3rem; border-radius: 6px; text-decoration: none; }
+.btn:hover { filter: brightness(1.08); }
+
+figure.chart { margin: 0; }
+figure.chart svg { width: 100%; height: auto; display: block; }
+.axis, .grid { stroke: var(--line); stroke-width: 1; }
+.tick { fill: var(--muted); font-size: 12px; font-family: inherit; }
+.line-typical { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.line-opt { fill: none; stroke: var(--accent-line); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.area-waste { fill: var(--waste); fill-opacity: .42; }
+figcaption { font-size: .9rem; color: var(--muted); margin-top: .6rem; }
+.legend { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; padding: 0; margin: .9rem 0 0; font-size: .92rem; }
+.legend li { display: flex; align-items: center; gap: .5rem; }
+.sw { width: 22px; height: 0; border-top: 3px solid; }
+.sw.t { border-color: var(--ink); }
+.sw.o { border-color: var(--accent-line); }
+.sw.w { height: 12px; width: 22px; border: 0; background: var(--waste); opacity: .6; border-radius: 2px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .line-opt { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.9s ease-out .35s forwards; }
+  .area-waste { opacity: 0; animation: fadein .9s ease-out 1.5s forwards; }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadein { to { opacity: 1; } }
+
+section.row { border-top: 1px solid var(--line); padding: 3rem 0; }
+section.row .wrap { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 2rem 3rem; }
+h2 { font-size: 1.3rem; line-height: 1.25; letter-spacing: -.01em; font-weight: 800; margin: 0; }
+.body > :first-child { margin-top: 0; }
+.body > :last-child { margin-bottom: 0; }
+.body p, .body li { max-width: 64ch; }
+.body ul { padding-left: 1.2rem; }
+.body li { margin-bottom: .55rem; }
+.body strong { font-weight: 700; }
+.waste-text { color: var(--waste-text); }
+
+.flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 1.2rem 0 0; padding: 0; list-style: none; }
+.flow li { border-top: 3px solid var(--accent-line); padding-top: .7rem; margin: 0; }
+.flow b { display: block; font-size: 1.05rem; }
+.flow span { color: var(--muted); font-size: .98rem; }
+
+figure.arch { margin: 1.4rem 0 0; }
+figure.arch svg { width: 100%; max-width: 680px; height: auto; display: block; }
+.arch .band { fill: var(--panel); stroke: var(--line); stroke-width: 1; }
+.arch .name { fill: var(--ink); font-size: 14px; font-weight: 700; font-family: inherit; }
+.arch .item { fill: var(--muted); font-size: 13px; font-family: inherit; }
+.arch .link { stroke: var(--accent-line); stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; max-width: 760px; font-size: .98rem; }
+th, td { text-align: left; padding: .7rem .9rem .7rem 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { border-bottom: 2px solid var(--ink); font-weight: 800; }
+tbody th { font-weight: 700; width: 24%; }
+
+.tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.2rem 0 0; }
+.tiers div { border-top: 3px solid var(--accent-line); padding-top: .7rem; }
+.tiers h3 { margin: 0 0 .3rem; font-size: 1.1rem; }
+.tiers p { margin: 0; color: var(--muted); }
+
+ol.road { list-style: none; counter-reset: step; padding: 0; margin: 0; max-width: 64ch; }
+ol.road li { counter-increment: step; position: relative; padding: 0 0 1.1rem 2.6rem; margin: 0; border-left: 0; }
+ol.road li::before { content: counter(step); position: absolute; left: 0; top: .05rem; width: 1.7rem; height: 1.7rem; border: 2px solid var(--accent-line); border-radius: 50%; text-align: center; font-size: .85rem; font-weight: 700; line-height: 1.45rem; color: var(--accent); }
+ol.road li::after { content: ""; position: absolute; left: .85rem; top: 1.9rem; bottom: .15rem; border-left: 2px solid var(--line); }
+ol.road li:last-child::after { display: none; }
+
+footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--muted); font-size: .95rem; }
+footer p { margin: 0 0 .5rem; max-width: 70ch; }
+
+@media (max-width: 820px) {
+  .hero .wrap { grid-template-columns: 1fr; gap: 2rem; }
+  section.row .wrap { grid-template-columns: 1fr; gap: 1rem; }
+  .flow, .tiers { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="wordmark" href="#top">Eco<span>Optima</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#problem">Problem</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#model">Business model</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <h1>EcoOptima: IoT energy management for German SMEs</h1>
+        <p class="lead">Turning energy waste into green business value.</p>
+        <p class="note">EcoOptima is a concept under development. Savings figures on this page are market estimates, not measured results.</p>
+        <a class="btn" href="https://www.linkedin.com/in/akshayvastrad">Message me on LinkedIn</a>
+      </div>
+
+      <figure class="chart">
+        <svg viewBox="0 0 660 300" role="img" aria-labelledby="chart-t chart-d">
+          <title id="chart-t">Illustrative daily energy load profile</title>
+          <desc id="chart-d">A typical load curve stays high overnight because of standby devices. An optimized curve follows the same working-hour pattern but with a much lower overnight and evening load. The shaded band between the two curves is avoidable waste. The data is illustrative, not measured.</desc>
+          <line class="grid" x1="40" y1="60" x2="620" y2="60"/>
+          <line class="grid" x1="40" y1="110" x2="620" y2="110"/>
+          <line class="grid" x1="40" y1="160" x2="620" y2="160"/>
+          <line class="grid" x1="40" y1="210" x2="620" y2="210"/>
+          <line class="axis" x1="40" y1="260" x2="620" y2="260"/>
+          <polygon class="area-waste" points="40,184 112.5,188 185,180 209,150 233,96 282,84 330,100 354,120 378,90 427,92 475,140 523,164 572,176 620,184 620,224 572,220 523,208 475,172 427,108 378,104 354,136 330,116 282,100 233,108 209,160 185,220 112.5,228 40,224"/>
+          <polyline class="line-typical" points="40,184 112.5,188 185,180 209,150 233,96 282,84 330,100 354,120 378,90 427,92 475,140 523,164 572,176 620,184"/>
+          <polyline class="line-opt" pathLength="1" points="40,224 112.5,228 185,220 209,160 233,108 282,100 330,116 354,136 378,104 427,108 475,172 523,208 572,220 620,224"/>
+          <text class="tick" x="40" y="282" text-anchor="start">00:00</text>
+          <text class="tick" x="185" y="282" text-anchor="middle">06:00</text>
+          <text class="tick" x="330" y="282" text-anchor="middle">12:00</text>
+          <text class="tick" x="475" y="282" text-anchor="middle">18:00</text>
+          <text class="tick" x="620" y="282" text-anchor="end">24:00</text>
+        </svg>
+        <ul class="legend">
+          <li><span class="sw t" aria-hidden="true"></span>Typical load</li>
+          <li><span class="sw o" aria-hidden="true"></span>With optimization (concept)</li>
+          <li><span class="sw w" aria-hidden="true"></span>Avoidable waste</li>
+        </ul>
+        <figcaption>Illustrative curve over one day. Not measured data.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <section class="row" id="problem">
+    <div class="wrap">
+      <h2>The problem</h2>
+      <div class="body">
+        <ul>
+          <li><strong>Energy is wasted.</strong> Old equipment and a lack of data can cost small businesses an estimated 15–30% of their energy.</li>
+          <li><strong>Manual audits are slow and expensive.</strong> Many SMEs never get a detailed picture of where energy goes.</li>
+          <li><strong>Regulation adds pressure.</strong> Energy efficiency rules (EED) and sustainability reporting (CSRD) create compliance work that SMEs often meet through their customers.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="solution">
+    <div class="wrap">
+      <h2>The solution</h2>
+      <div class="body">
+        <p>EcoOptima is a plug-and-play system that closes the loop between measuring and acting on energy use.</p>
+        <ul class="flow">
+          <li><b>Monitor</b><span>IoT sensors collect real-time energy data.</span></li>
+          <li><b>Analyze</b><span>An AI cloud platform analyzes, predicts and finds waste.</span></li>
+          <li><b>Act</b><span>Autonomous control adjusts HVAC, lighting and devices.</span></li>
+        </ul>
+        <p style="margin-top:1.4rem">Standard smart meters collect and visualize consumption, then leave the interpretation to you. EcoOptima is designed to go one step further.</p>
+        <div class="table-wrap">
+          <table>
+            <caption class="sr" style="position:absolute;left:-999px">Standard smart meter compared with EcoOptima</caption>
+            <thead><tr><th scope="col"></th><th scope="col">Standard smart meter</th><th scope="col">EcoOptima</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">What it does</th><td>Collects and visualizes consumption</td><td>Monitors, analyzes and acts</td></tr>
+              <tr><th scope="row">Intelligence</th><td>Typically no built-in optimization</td><td>Forecasting, anomaly detection and optimization</td></tr>
+              <tr><th scope="row">Who decides</th><td>You read the data and decide</td><td>The system adjusts devices within limits you set</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="architecture">
+    <div class="wrap">
+      <h2>Planned architecture</h2>
+      <div class="body">
+        <p>Four layers, with data flowing up and control commands flowing down. Control keeps running locally if the internet connection drops.</p>
+        <figure class="arch">
+          <svg viewBox="0 0 680 330" role="img" aria-labelledby="arch-t arch-d">
+            <title id="arch-t">EcoOptima planned system architecture</title>
+            <desc id="arch-d">Four layers from bottom to top: field devices on site, an edge gateway, a cloud platform in an EU region, and applications such as a dashboard, alerts, reports and billing. Arrows between layers point both ways.</desc>
+            <rect class="band" x="10" y="248" width="660" height="62" rx="6"/>
+            <text class="name" x="26" y="283" dominant-baseline="central">Field layer</text>
+            <text class="item" x="190" y="270" dominant-baseline="central">Energy meters and smart plugs</text>
+            <text class="item" x="190" y="291" dominant-baseline="central">Temperature, CO2 and occupancy sensors</text>
+
+            <path class="link" d="M340 232 V244 M334 238 L340 232 L346 238 M334 238 L340 244 L346 238"/>
+
+            <rect class="band" x="10" y="166" width="660" height="62" rx="6"/>
+            <text class="name" x="26" y="201" dominant-baseline="central">Edge gateway</text>
+            <text class="item" x="190" y="188" dominant-baseline="central">Local MQTT broker and cloud bridge</text>
+            <text class="item" x="190" y="209" dominant-baseline="central">Edge inference, local rules, fail-safe control</text>
+
+            <path class="link" d="M340 150 V162 M334 156 L340 150 L346 156 M334 156 L340 162 L346 156"/>
+
+            <rect class="band" x="10" y="84" width="660" height="62" rx="6"/>
+            <text class="name" x="26" y="119" dominant-baseline="central">Cloud platform</text>
+            <text class="item" x="190" y="106" dominant-baseline="central">Time series storage in an EU region</text>
+            <text class="item" x="190" y="127" dominant-baseline="central">Forecasting, anomaly detection, savings verification</text>
+
+            <path class="link" d="M340 66 V80 M334 72 L340 66 L346 72 M334 74 L340 80 L346 74"/>
+
+            <rect class="band" x="10" y="2" width="660" height="60" rx="6"/>
+            <text class="name" x="26" y="36" dominant-baseline="central">Applications</text>
+            <text class="item" x="190" y="24" dominant-baseline="central">Web dashboard and alerts</text>
+            <text class="item" x="190" y="45" dominant-baseline="central">Savings and CSRD reports, billing for Lite and Pro</text>
+          </svg>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="model">
+    <div class="wrap">
+      <h2>Business model</h2>
+      <div class="body">
+        <p>Two subscription tiers, plus an optional carbon service.</p>
+        <div class="tiers">
+          <div>
+            <h3>Lite</h3>
+            <p>Monitoring and alerts for a fixed monthly fee, so costs stay predictable and risk stays low.</p>
+          </div>
+          <div>
+            <h3>Pro</h3>
+            <p>Full optimization with AI control, priced as a share of the energy savings and bundled with carbon brokerage.</p>
+          </div>
+        </div>
+        <p style="margin-top:1.6rem"><strong>Carbon brokerage.</strong> The platform is meant to verify a client’s energy and carbon savings, aggregate them into carbon credits and sell them on the client’s behalf. Whether savings qualify as credits depends on recognized verification standards, so this part comes after verified savings reports.</p>
+        <p><strong>Market.</strong> Germany has about 3.5 million SMEs. The 15–30% savings potential is an estimate to be tested in pilots.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="roadmap">
+    <div class="wrap">
+      <h2>Roadmap</h2>
+      <div class="body">
+        <p>Planned, not yet delivered.</p>
+        <ol class="road">
+          <li>Validate the problem with SME energy data and interviews.</li>
+          <li>Build the monitoring tier (Lite): meters, gateway, dashboard and alerts.</li>
+          <li>Add baseline forecasting and anomaly detection.</li>
+          <li>Add controlled optimization (Pro), starting with advice before autonomous control.</li>
+          <li>Add verified savings reports and carbon accounting.</li>
+          <li>Run pilots with SME customers.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <div class="body">
+        <p><strong>Akshay Vastrad</strong> leads the EcoOptima concept. He is a Master’s student in Embedded Systems Design at Hochschule Bremerhaven, working on IoT and real-time systems.</p>
+        <!--
+        Add your teammate here once you have agreed on it:
+        <p><strong>Mert Ali Türk</strong> ...</p>
+        -->
+        <p>Interested in a pilot, or have feedback from an SME perspective? <a href="https://www.linkedin.com/in/akshayvastrad">Get in touch on LinkedIn</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>EcoOptima is a concept under development. Figures are estimates, not guarantees of savings.</p>
+    <p>This page uses no cookies and no tracking.</p>
+    <!-- Germany: if you present this as a business, add an Impressum page and link it here. -->
+  </div>
+</footer>
+</body>
+</html>
